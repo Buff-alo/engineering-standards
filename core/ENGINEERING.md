@@ -1,6 +1,6 @@
 # Universal Engineering Principles
 
-**Version:** 1.0.0 (Constitution Heritage: v3.0) <!-- x-release-please-version -->  
+**Version:** 1.1.0 (Constitution Heritage: v3.0) <!-- x-release-please-version -->  
 **Scope:** All software repositories and engineering tasks  
 **Purpose:** Establish universal, tool-agnostic engineering principles covering correctness, architecture, data integrity, security, dependencies, operations, and API contracts. Stack-specific implementation rules belong in `profiles/`, persona definitions in [PERSONAS.md](PERSONAS.md), delivery workflows in [WORKFLOW.md](WORKFLOW.md), and verification standards in [QUALITY-GATES.md](QUALITY-GATES.md).
 
