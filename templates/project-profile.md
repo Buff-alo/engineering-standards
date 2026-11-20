@@ -37,11 +37,12 @@
 
 ## 3. Approved Deviations & Local Conventions
 
-Document any intentional override of a stack profile rule here (per precedence level 3 in `core/WORKFLOW.md`):
+Document any intentional specialization or stack-profile deviation here (per [WORKFLOW.md](../core/WORKFLOW.md) Section 1.4). Project contracts may customize versions, tooling, commands, and stack defaults, **but MUST NOT silently weaken non-negotiable core invariants** (security, privacy, data integrity, safety, or verification honesty):
 
 - **Rule overridden:** `<profile & section>`
 - **Local convention:** `<what this repository does instead>`
 - **Justification:** `<why this override is required>`
+- **Risk & compensating controls (required if touching a core invariant):** `<explicit risk assessment or N/A for stack/tooling preference>`
 
 ---
 

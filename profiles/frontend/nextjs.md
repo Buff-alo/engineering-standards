@@ -10,11 +10,11 @@
 
 This profile supplements `core/ENGINEERING.md`, `core/PERSONAS.md`, `core/WORKFLOW.md`, and `core/QUALITY-GATES.md`. It extends `profiles/frontend/react.md` and does not replace React component, TypeScript, accessibility, or frontend security standards.
 
-If rules conflict, follow the precedence order in `core/WORKFLOW.md`:
-1. Applicable platform, safety, and security constraints.
+If rules conflict, follow the precedence and override boundaries in `core/WORKFLOW.md` (Section 1.4):
+1. Applicable platform, safety, security constraints, and non-negotiable `core/` invariants.
 2. Explicit task requirements.
-3. Repository-specific instructions and established project contracts.
-4. Universal standards in `core/`.
+3. Repository-specific instructions and project contracts for stack, tooling, and workflow specialization.
+4. Remaining universal standards in `core/`.
 5. This profile and `profiles/frontend/react.md`.
 6. Existing project conventions unless explicitly changed.
 

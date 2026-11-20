@@ -50,7 +50,8 @@ Use this mapping as a starting point:
 |---|---|
 | Django or FastAPI backend | `profiles/backend/python-backend.md` |
 | Java or Spring Boot | `profiles/backend/java-springboot.md` |
-| PHP or Laravel | `profiles/backend/php-laravel.md` |
+| PHP or Laravel (12 / 13+ current; check `composer.json`) | `profiles/backend/php-laravel.md` |
+| PHP / Laravel 11 (legacy / EOL compatibility only) | `profiles/backend/php-laravel-11.md` |
 | React or TypeScript web application | `profiles/frontend/react.md` |
 | Next.js web application | `profiles/frontend/nextjs.md` (+ `profiles/frontend/react.md`) |
 | React Native application | `profiles/mobile/react-native.md` |
@@ -69,14 +70,20 @@ If a project uses a custom profile layout, follow its established organization a
 
 Apply this precedence:
 
-1. Applicable platform, safety, and security constraints.
+1. Applicable platform, safety, and security constraints, plus **non-negotiable core invariants** ([ENGINEERING.md](ENGINEERING.md) Sections 1, 3, and 4; honest verification and reporting in [QUALITY-GATES.md](QUALITY-GATES.md)).
 2. Explicit task requirements, within those constraints.
-3. Repository-specific instructions and established project contracts (e.g., `project-profile.md`).
-4. Universal standards in `core/` ([ENGINEERING.md](ENGINEERING.md), [PERSONAS.md](PERSONAS.md), [WORKFLOW.md](WORKFLOW.md), [QUALITY-GATES.md](QUALITY-GATES.md)).
-5. Applicable stack profiles and documented project conventions.
+3. Repository-specific instructions and established project contracts (e.g., `project-profile.md`) for **project specialization** (versions, package managers, commands, architecture conventions, and approved stack deviations).
+4. Remaining universal standards and workflows in `core/`.
+5. Applicable stack profiles (`profiles/`) and documented project conventions.
 6. General engineering preferences.
 
-Resolve conflicts by identifying their scope. Do not silently override a specific project requirement with a generic preference. If two equally authoritative requirements conflict materially, ask for clarification when necessary.
+#### Override boundary rules
+
+- **Allowed in project contracts:** Specializing runtime versions, build/test commands, framework choices, directory structure, and opinionated stack defaults (e.g., Docker network names or library choices).
+- **Forbidden as silent overrides:** Instructing an agent to skip authorization checks, weaken input validation, hardcode secrets, bypass concurrency protections, weaken tests to pass, or report unverified checks as passing.
+- **Documented exceptions:** Any intentional exception to a core security, privacy, or data-integrity invariant requires an explicit, documented risk assessment, rationale, and compensating controls—never a silent override in `project-profile.md`.
+
+Resolve conflicts by identifying their scope. Do not silently override a specific project requirement with a generic preference, and never allow a project configuration file to silently override a non-negotiable invariant. If two equally authoritative requirements conflict materially, ask for clarification when necessary.
 
 ---
 

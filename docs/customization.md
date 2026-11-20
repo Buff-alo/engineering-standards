@@ -28,8 +28,8 @@ Do not edit `core/` or `profiles/` directly in downstream repositories when a pr
 1. Copy [templates/project-profile.md](../templates/project-profile.md) to `project-profile.md` in your repository root.
 2. Record:
    - Authoritative runtime versions and package manager commands.
-   - Any deliberate deviation from a stack profile (for example, using a custom Docker network name instead of `universal_dev_network`, or retaining an existing framework library).
-3. Because repository-specific contracts rank **above** `core/` and `profiles/` in [WORKFLOW.md](../core/WORKFLOW.md) Section 1.4, agents automatically respect documented project overrides.
+   - Any deliberate specialization or deviation from a stack profile (for example, using a custom Docker network name instead of `universal_dev_network`, or retaining an existing framework library).
+3. Under [WORKFLOW.md](../core/WORKFLOW.md) Section 1.4, repository-specific contracts govern **project specialization** (versions, tooling, commands, and stack defaults) ahead of stack profiles and general `core/` conventions, **but MUST NOT silently weaken non-negotiable core invariants** (security, privacy, authorization, data integrity, safety, or honest test verification). Any exception to a core invariant requires an explicit, documented risk assessment and compensating controls.
 
 ---
 

@@ -35,14 +35,16 @@
 
 ## 2. Conflict Precedence Hierarchy
 
-When instructions from different sources overlap, resolve conflicts using the precedence defined in [WORKFLOW.md](../core/WORKFLOW.md):
+When instructions from different sources overlap, resolve conflicts using the precedence and override boundaries defined in [WORKFLOW.md](../core/WORKFLOW.md):
 
-1. Applicable platform, safety, and security constraints.
+1. Applicable platform, safety, and security constraints, plus **non-negotiable core invariants** ([ENGINEERING.md](../core/ENGINEERING.md) Sections 1, 3, and 4; honest verification in [QUALITY-GATES.md](../core/QUALITY-GATES.md)).
 2. Explicit task requirements, within those constraints.
-3. Repository-specific instructions and established project contracts (e.g., `project-profile.md`).
-4. Universal standards in `core/`.
+3. Repository-specific instructions and established project contracts (e.g., `project-profile.md`) for project specialization (versions, commands, tooling, architecture).
+4. Remaining universal standards and workflows in `core/`.
 5. Applicable stack profiles (`profiles/`) and documented project conventions.
 6. General engineering preferences.
+
+Project contracts specialize *how* work is built and verified—they must not silently weaken security, data integrity, or verification honesty.
 
 ---
 

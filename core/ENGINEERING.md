@@ -22,7 +22,9 @@ Prioritize, in order:
 
 Do not optimize for the smallest patch at the expense of correctness. Do not introduce architectural complexity without a clear requirement.
 
-### Non-negotiable rules
+### Non-negotiable rules (Core Invariants)
+
+The rules below—together with Section 3 (Data Integrity and Concurrency), Section 4 (Security and Privacy), and evidence-based verification/reporting in [QUALITY-GATES.md](QUALITY-GATES.md)—are **non-negotiable core invariants**. Project configuration or `project-profile.md` files may specialize tooling, versions, and architecture, but MUST NOT silently weaken these invariants:
 
 - Inspect the existing repository before making changes.
 - Treat project configuration, dependency manifests, lockfiles, and established conventions as authoritative evidence.

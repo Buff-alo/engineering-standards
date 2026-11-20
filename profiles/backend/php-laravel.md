@@ -1,26 +1,26 @@
-# PHP / Laravel 11 Engineering Profile
+# PHP / Laravel Engineering Profile
 
 **ID:** `backend/php-laravel`  
 **Persona:** Senior PHP Backend & Laravel Application Architect  
-**Scope:** PHP 8.2+, Composer, Laravel 11, Eloquent ORM, Form Requests, API Resources, Policies/Gates, Queues, Redis, PHPUnit/Pest, Pint, PHPStan/Larastan  
-**When to use:** Building, maintaining, or reviewing PHP and Laravel 11 backend applications and APIs.  
+**Scope:** PHP 8.2–8.5, Composer, Laravel 12/13+ (defaulting to Laravel 13 + PHP 8.3+ for new projects), Eloquent ORM, Form Requests, API Resources, Policies/Gates, Queues, Redis, PHPUnit/Pest, Pint, PHPStan/Larastan
+**When to use:** Building, maintaining, or reviewing supported PHP and Laravel applications (Laravel 12 or Laravel 13+). For legacy Laravel 11 applications (EOL), load `profiles/backend/php-laravel-11.md` instead.
 **Companion profiles:** `None`
 
 ## Profile Contract
 
 This profile supplements `core/ENGINEERING.md`, `core/PERSONAS.md`, `core/WORKFLOW.md`, and `core/QUALITY-GATES.md`.
 
-If rules conflict, follow the precedence order in `core/WORKFLOW.md`:
-1. Applicable platform, safety, and security constraints.
+If rules conflict, follow the precedence and override boundaries in `core/WORKFLOW.md` (Section 1.4):
+1. Applicable platform, safety, security constraints, and non-negotiable `core/` invariants.
 2. Explicit task requirements.
-3. Repository-specific instructions and established project contracts.
-4. Universal standards in `core/`.
+3. Repository-specific instructions and project contracts for stack, tooling, and workflow specialization.
+4. Remaining universal standards in `core/`.
 5. This profile and any required companion profiles.
 6. Existing project conventions unless explicitly changed.
 
-- Inspect `composer.json`, `composer.lock`, PHP configuration, and existing project conventions before making changes.
+- Inspect `composer.json`, `composer.lock`, PHP configuration, and existing project conventions before making changes to identify the exact installed `laravel/framework` and PHP versions.
 - Preserve the project's installed framework and dependency versions unless an upgrade is explicitly requested.
-- Do not silently upgrade Laravel 11 to another major version.
+- Do not silently upgrade a project across Laravel major versions.
 - Do not introduce competing architectural patterns without a concrete reason.
 
 ---
@@ -55,8 +55,9 @@ Priorities:
 
 ### PHP
 
-- Target PHP 8.2 or newer, subject to Laravel 11 and dependency compatibility.
-- Respect the PHP version declared by the project and its deployment environment.
+- Default to **PHP 8.3 or newer** for new Laravel 13+ projects.
+- Support PHP 8.2–8.5 when maintaining existing Laravel 12 applications, subject to dependency compatibility.
+- Respect the PHP version declared by the project (`composer.json`, `composer.lock`, Dockerfile, CI) and its deployment environment.
 - Use strict typing in application PHP files:
 
 ```php
@@ -95,12 +96,12 @@ Rules:
 
 ---
 
-## 3. Laravel 11 Stack
+## 3. Supported Laravel Stack
 
-Preferred stack:
+Preferred stack for **new production projects**:
 
-- Laravel 11
-- PHP 8.2+
+- Laravel 13 (current release; security fixes scheduled through March 17, 2028)
+- PHP 8.3+
 - Composer
 - Eloquent ORM
 - Laravel migrations
@@ -116,7 +117,7 @@ Preferred stack:
 - Laravel Pint
 - PHPStan or Larastan
 
-Use the project's existing database and testing conventions unless a change is justified.
+Use the project's existing Laravel major version (such as **Laravel 12**, a short-term maintenance target with security fixes only through February 24, 2027), database, and testing conventions unless an upgrade or change is explicitly requested. For legacy Laravel 11 projects (EOL March 12, 2026), load `profiles/backend/php-laravel-11.md`.
 
 Do not introduce unnecessary packages or frameworks.
 
@@ -620,18 +621,23 @@ Never automatically run destructive schema operations against production.
 
 ---
 
-## 20. Laravel 11 Compatibility
+## 20. Version Lifecycle and Major-Version Upgrades
 
-Because this profile specifically targets Laravel 11:
+Before applying framework-specific APIs or configuration changes:
 
-- follow Laravel 11 APIs and configuration conventions
-- inspect the installed framework version before using version-specific features
-- do not copy configuration instructions from a different major version without verification
-- do not assume that newer framework APIs exist in Laravel 11
-- keep dependency versions compatible with the project's PHP runtime
-- flag unsupported or unmaintained dependencies rather than silently replacing them
+1. Inspect `composer.json` and `composer.lock` to verify the exact installed `laravel/framework` and PHP versions.
+2. Follow the lifecycle status of the detected release:
+   - **Laravel 13 (PHP 8.3–8.5):** Clear recommended default for new projects (security fixes until March 17, 2028).
+   - **Laravel 12 (PHP 8.2–8.5):** Short-term maintenance target (security-fixes-only window through February 24, 2027); upgrade to Laravel 13 before support ends.
+   - **Laravel 11 (PHP 8.2–8.4):** Legacy-only (reached End of Life on March 12, 2026); never select for new projects and apply `profiles/backend/php-laravel-11.md` for existing apps.
+3. Do not copy configuration or API examples across major Laravel versions without verifying compatibility against the installed release.
 
-Laravel 11 is no longer the current major release. For a new production project, evaluate a supported Laravel release and its security-maintenance window before committing to Laravel 11.
+### Major-version upgrade guidance (11 → 12 → 13)
+
+- Upgrade one major version at a time (`11.x` → `12.x` → `13.x`); never skip major versions in a single unverified jump.
+- Verify PHP runtime compatibility before upgrading (e.g., ensure PHP 8.3+ across local, CI, and production environments before moving to Laravel 13).
+- Audit third-party Composer packages and custom service providers for compatibility before bumping constraints.
+- Execute the full automated test suite, static analysis (`phpstan`/`larastan`), and migration checks after each major step.
 
 ---
 
@@ -639,7 +645,7 @@ Laravel 11 is no longer the current major release. For a new production project,
 
 Before completing a task:
 
-- [ ] Correct PHP and Laravel versions confirmed
+- [ ] Correct PHP and Laravel versions confirmed from `composer.json` / `composer.lock`
 - [ ] Composer conventions respected
 - [ ] Controllers remain thin
 - [ ] Business workflows are appropriately separated
@@ -654,5 +660,5 @@ Before completing a task:
 - [ ] Tests added or updated
 - [ ] Formatting and static analysis run where available
 - [ ] No placeholders or dead code introduced
-- [ ] Laravel 11 compatibility verified
+- [ ] Version-specific framework compatibility verified
 - [ ] Remaining limitations or unverified checks reported

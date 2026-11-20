@@ -10,7 +10,8 @@ Use **explicit profile composition**: inspect the target repository first ([WORK
 |---|---|---|---|
 | Backend | [python-backend.md](../profiles/backend/python-backend.md) | None | Django (Ninja) or FastAPI backends, Celery, Channels, pytest |
 | Backend | [java-springboot.md](../profiles/backend/java-springboot.md) | None | Java 21+ and Spring Boot 3.x+ services, JPA, Flyway/Liquibase |
-| Backend | [php-laravel.md](../profiles/backend/php-laravel.md) | None | PHP 8.2+ and Laravel 11 applications, Eloquent, Queues, Pest/PHPUnit |
+| Backend | [php-laravel.md](../profiles/backend/php-laravel.md) | None | Supported PHP 8.2–8.5 and Laravel apps: defaults to Laravel 13 (+ PHP 8.3+) for new projects; Laravel 12 is short-term maintenance |
+| Backend | [php-laravel-11.md](../profiles/backend/php-laravel-11.md) | None | Legacy-only Laravel 11 apps (security EOL March 12, 2026) — maintenance & upgrades to Laravel 12/13 only |
 | Frontend | [react.md](../profiles/frontend/react.md) | None | React + TypeScript SPAs, components, state, Tailwind, accessibility |
 | Frontend | [nextjs.md](../profiles/frontend/nextjs.md) | `frontend/react.md` | Next.js App Router or Pages Router, RSC, Server Actions, Route Handlers |
 | Mobile | [react-native.md](../profiles/mobile/react-native.md) | None | React Native / Expo apps, Expo Router, offline sync, secure storage |

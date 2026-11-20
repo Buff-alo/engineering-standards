@@ -66,13 +66,14 @@ Keep `core/` universal and tool-agnostic.
 - Review profile instructions for contradictions with `core/` standards.
 - Treat versions as project-specific facts, not universal assumptions.
 - When a profile specifies a particular framework version, verify that the project actually uses it before applying version-specific guidance.
-- Validate changes with `python3 scripts/validate_profiles.py --root . --strict` before committing.
+- Validate structural and repository consistency with `python3 scripts/validate_profiles.py --root . --strict` and integration/template completeness with `python3 scripts/check_integrations_and_templates.py --root .` before committing.
 
 ### Canonical profile registry
 
 - `profiles/backend/python-backend.md` — Python backend applications, including Django and FastAPI.
 - `profiles/backend/java-springboot.md` — Java and Spring Boot applications.
-- `profiles/backend/php-laravel.md` — PHP and Laravel applications, including Laravel 11 compatibility where required.
+- `profiles/backend/php-laravel.md` — PHP and supported Laravel applications (defaults to Laravel 13 for new projects; Laravel 12 is short-term maintenance).
+- `profiles/backend/php-laravel-11.md` — Legacy-only PHP and Laravel 11 compatibility profile (EOL; maintenance and upgrade paths only).
 - `profiles/frontend/react.md` — React and TypeScript web applications.
 - `profiles/frontend/nextjs.md` — Next.js App Router, Pages Router, Server Components, Server Actions, Route Handlers, rendering, caching, data access, and deployment.
 - `profiles/mobile/react-native.md` — React Native mobile applications.
