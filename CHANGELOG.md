@@ -4,6 +4,18 @@ All notable changes to `engineering-standards` are documented in this file.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0](https://github.com/Buff-alo/engineering-standards/compare/v1.0.0...v1.1.0) (2026-11-20)
+
+
+### Features
+
+* strengthen validation, template checks, and release packaging ([386a78f](https://github.com/Buff-alo/engineering-standards/commit/386a78fe4b5193e6f7981ff2e98ef64d381408b0))
+
+
+### Bug Fixes
+
+* enforce non-negotiable invariants and Laravel lifecycle ([8939a13](https://github.com/Buff-alo/engineering-standards/commit/8939a13beb30f8ef2516f6e0c249d077719a82d3))
+
 ## [1.0.0] - 2026-11-20
 
 ### Added
