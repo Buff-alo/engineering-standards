@@ -1,0 +1,210 @@
+# Graph Report - engineering-standards  (2026-11-20)
+
+## Corpus Check
+- 33 files · ~19,546 words
+- Verdict: corpus is large enough that graph structure adds value.
+- Unclassified: 2 file(s) not represented in the graph (top: (none) 2)
+
+## Summary
+- 399 nodes · 459 edges · 30 communities
+- Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
+- Token cost: 0 input · 0 output
+
+## Graph Freshness
+- Built from commit: `ee19b61c`
+- Run `git rev-parse HEAD` and compare to check if the graph is stale.
+- Run `graphify update .` after code changes (no API cost).
+
+## Community Hubs (Navigation)
+- validate_profiles.py
+- README.md
+- Next.js Engineering Profile
+- Java / Spring Boot Engineering Profile
+- PHP / Laravel 11 Engineering Profile
+- React & Frontend Engineering Profile
+- 2. Task Classification and Execution
+- Design & Implementation Plan: `engineering-standards` Repository
+- DevSecOps & Platform Engineering Profile
+- Python Backend Engineering Profile
+- AI / LLM Engineering Profile
+- React Native Engineering Profile
+- Rust Engineering Profile
+- Tauri Engineering Profile
+- Universal Engineering Principles
+- Common Composition Recipes
+- engineering-standards
+- Quality Gates, Reporting, and Profile Maintenance
+- Pinning & Customization
+- Engineering Personas
+- Architecture Overview
+- Claude Code Adapter
+- CLAUDE.md — Project Claude Code Instructions
+- GEMINI.md — Project Gemini Instructions
+- Project Engineering Profile
+- [1.0.0] - 2026-11-20
+- Claude Code Integration
+- AGENTS.md — Codex Adapter
+- Gemini CLI / Antigravity Adapter
+- Gemini CLI & Antigravity Integration
+
+## God Nodes (most connected - your core abstractions)
+1. `Java / Spring Boot Engineering Profile` - 27 edges
+2. `PHP / Laravel 11 Engineering Profile` - 23 edges
+3. `Next.js Engineering Profile` - 22 edges
+4. `validate_repository()` - 17 edges
+5. `DevSecOps & Platform Engineering Profile` - 17 edges
+6. `Python Backend Engineering Profile` - 15 edges
+7. `React & Frontend Engineering Profile` - 15 edges
+8. `AI / LLM Engineering Profile` - 14 edges
+9. `React Native Engineering Profile` - 13 edges
+10. `Rust Engineering Profile` - 13 edges
+
+## Surprising Connections (you probably didn't know these)
+- None detected - all connections are within the same source files.
+
+## Import Cycles
+- None detected.
+
+## Communities (30 total, 0 thin omitted)
+
+### Community 0 - "validate_profiles.py"
+Cohesion: 0.08
+Nodes (13): build_minimal_valid_repo(), ValidateProfilesTests, check_links_and_hygiene(), check_profiles(), check_registries(), check_structure(), discover_profiles(), extract_personas() (+5 more)
+
+### Community 1 - "README.md"
+Cohesion: 0.11
+Nodes (11): Adding or Updating a Stack Profile, Contributing to engineering-standards, Design Principles for Changes, Required Verification Before Opening a PR, Codex Integration, Maintenance, Setup in a Target Repository, 1. Core Standards (+3 more)
+
+### Community 2 - "Next.js Engineering Profile"
+Cohesion: 0.06
+Nodes (31): 10. Environment and Configuration, 11. Forms and Mutations, 12. TanStack Query and Client State, 13. Styling, Images, and Fonts, 14. SEO and Metadata, 15. Security, 16. Testing and Quality Gates, 17. Deployment and Runtime (+23 more)
+
+### Community 3 - "Java / Spring Boot Engineering Profile"
+Cohesion: 0.07
+Nodes (29): 10. Database Migrations, 11. Transactions, 12. Concurrency, 13. Validation, 14. Security, 15. Authorization, 16. Exception Handling, 17. External Services (+21 more)
+
+### Community 4 - "PHP / Laravel 11 Engineering Profile"
+Cohesion: 0.07
+Nodes (27): 10. Authentication and Authorization, 11. Application Security, 12. Configuration and Environment, 13. Caching, 14. File and Object Storage, 15. Frontend Integration, 16. Testing, 17. Code Quality (+19 more)
+
+### Community 5 - "React & Frontend Engineering Profile"
+Cohesion: 0.09
+Nodes (22): 10. Forms and User Interaction, 11. Testing, 12. Project Organization, 13. Quality Gate, 1. Preferred Frontend Stack, 2. TypeScript Standards, 3. Component Architecture, 4. State Management (+14 more)
+
+### Community 6 - "2. Task Classification and Execution"
+Cohesion: 0.12
+Nodes (17): 1.1 Inspect before changing, 1.2 Detect the actual stack, 1.3 Load only applicable profiles, 1.4 Resolve conflicting instructions, 1. Repository Discovery and Profile Loading, 2. Task Classification and Execution, 3. Implementation Workflow, 4. Planning Output Standard (+9 more)
+
+### Community 7 - "Design & Implementation Plan: `engineering-standards` Repository"
+Cohesion: 0.12
+Nodes (16): 1. Understanding Summary, 2. Assumptions, 3. Decision Log, 4. Final Architecture & Design, 5. System & Security Constraints, 6.1 Profile Metadata & Contract Schema (`profiles/<domain>/<name>.md`), 6.2 `core/QUALITY-GATES.md` Registry Contract, 6.3 Validator CLI & JSON/Exit Contract (`scripts/validate_profiles.py`) (+8 more)
+
+### Community 8 - "DevSecOps & Platform Engineering Profile"
+Cohesion: 0.12
+Nodes (17): 10. GitLab CI, 11. Secrets, 12. Observability, 13. Networking, 14. Infrastructure Changes, 15. Security, 1. Core Stack, 2. Docker (+9 more)
+
+### Community 9 - "Python Backend Engineering Profile"
+Cohesion: 0.13
+Nodes (15): 10. Channels, 11. FastAPI, 12. Async, 13. Testing, 1. Runtime, 2. Package Management, 3. Django, 4. Django Architecture (+7 more)
+
+### Community 10 - "AI / LLM Engineering Profile"
+Cohesion: 0.14
+Nodes (14): 10. RAG, 11. Agents, 12. Evaluation, 1. Core Principle, 2. Structured Output, 3. Architecture, 4. Provider Abstraction, 5. Prompt Management (+6 more)
+
+### Community 11 - "React Native Engineering Profile"
+Cohesion: 0.14
+Nodes (13): 10. Testing, 11. Build & Deployment, 1. Stack, 2. Navigation, 3. State, 4. Secure Storage, 5. API Architecture, 6. Networking (+5 more)
+
+### Community 12 - "Rust Engineering Profile"
+Cohesion: 0.14
+Nodes (13): 10. Security, 11. Performance, 1. Toolchain, 2. Async, 3. HTTP, 4. Error Handling, 5. Architecture, 6. State (+5 more)
+
+### Community 13 - "Tauri Engineering Profile"
+Cohesion: 0.14
+Nodes (13): 10. Testing, 11. Security, 1. Stack, 2. Architecture, 3. Rust Core, 4. Frontend, 5. IPC, 6. Capabilities (+5 more)
+
+### Community 14 - "Universal Engineering Principles"
+Cohesion: 0.22
+Nodes (9): 1. Mission and Operating Principles, 2. Architecture and Separation of Concerns, 3. Data Integrity and Concurrency, 4. Security and Privacy, 5. Dependencies and Tooling, 6. Configuration, Observability, and Operations, 7. Documentation and API Contracts, Non-negotiable rules (+1 more)
+
+### Community 15 - "Common Composition Recipes"
+Cohesion: 0.25
+Nodes (8): 1. Full-Stack Next.js + Python API Monorepo, 2. AI-Powered FastAPI Service, 3. Tauri v2 Desktop App with React UI, 4. Laravel + Dockerized CI/CD Application, Common Composition Recipes, Profile Catalog, Profile Selection & Composition, Selection Rules
+
+### Community 16 - "engineering-standards"
+Cohesion: 0.25
+Nodes (8): Architecture at a Glance, Django / FastAPI Backend, Documentation, engineering-standards, Explicit Profile Composition, Next.js Application, Quick Start, Rust + Tauri Desktop Application
+
+### Community 17 - "Quality Gates, Reporting, and Profile Maintenance"
+Cohesion: 0.29
+Nodes (7): 1. Testing and Quality Gates, 2. Completion Report, 3. Profile Maintenance, Canonical profile registry, Minimum expectations, Quality Gates, Reporting, and Profile Maintenance, Verification sequence
+
+### Community 18 - "Pinning & Customization"
+Cohesion: 0.33
+Nodes (6): 1. Pinning a Release in Your Project, 2. Customizing Without Forking, 3. Forking for Organization-Wide Defaults, Option A: Git Submodule (Recommended for Teams), Option B: Local Shared Checkout (Single Developer), Pinning & Customization
+
+### Community 19 - "Engineering Personas"
+Cohesion: 0.40
+Nodes (5): 1. Select One Primary Persona, 2. Persona Registry, 3. Persona-Selection Rules, 4. Behavioral Expectations, Engineering Personas
+
+### Community 20 - "Architecture Overview"
+Cohesion: 0.40
+Nodes (5): 1. Layer Separation, 2. Conflict Precedence Hierarchy, 3. Personas vs. Profiles, Architecture Overview, Why Separate `core/` from `integrations/`?
+
+### Community 21 - "Claude Code Adapter"
+Cohesion: 0.40
+Nodes (4): Claude Code Adapter, Mandatory Core Standards, Precedence, Stack Profile Selection
+
+### Community 22 - "CLAUDE.md — Project Claude Code Instructions"
+Cohesion: 0.40
+Nodes (4): 1. Core Standards, 2. Active Stack Profiles, 3. Project Context, CLAUDE.md — Project Claude Code Instructions
+
+### Community 23 - "GEMINI.md — Project Gemini Instructions"
+Cohesion: 0.40
+Nodes (4): 1. Core Standards, 2. Active Stack Profiles, 3. Project Overrides & Verification, GEMINI.md — Project Gemini Instructions
+
+### Community 24 - "Project Engineering Profile"
+Cohesion: 0.40
+Nodes (5): 1. Verified Runtime & Tooling, 2. Authoritative Verification Commands, 3. Approved Deviations & Local Conventions, 4. Critical Invariants & Operational Notes, Project Engineering Profile
+
+### Community 25 - "[1.0.0] - 2026-11-20"
+Cohesion: 0.50
+Nodes (4): [1.0.0] - 2026-11-20, Added, Changelog, Fixed
+
+### Community 26 - "Claude Code Integration"
+Cohesion: 0.50
+Nodes (4): Claude Code Integration, Maintenance, Option 1: Per-Project Setup, Option 2: User-Level Setup (`~/.claude/CLAUDE.md`)
+
+### Community 27 - "AGENTS.md — Codex Adapter"
+Cohesion: 0.50
+Nodes (3): AGENTS.md — Codex Adapter, Explicit Profile Composition, Universal Standards
+
+### Community 28 - "Gemini CLI / Antigravity Adapter"
+Cohesion: 0.50
+Nodes (3): Gemini CLI / Antigravity Adapter, Load Core Standards, Profile Composition
+
+### Community 29 - "Gemini CLI & Antigravity Integration"
+Cohesion: 0.50
+Nodes (4): Gemini CLI & Antigravity Integration, Maintenance, Option 1: Global Setup (`~/.gemini/GEMINI.md`), Option 2: Per-Project Setup
+
+## Knowledge Gaps
+- **265 isolated node(s):** `Added`, `Fixed`, `Design Principles for Changes`, `Adding or Updating a Stack Profile`, `Required Verification Before Opening a PR` (+260 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 290 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+
+## Suggested Questions
+_Questions this graph is uniquely positioned to answer:_
+
+- **Why does `Next.js Engineering Profile` connect `Next.js Engineering Profile` to `README.md`?**
+  _High betweenness centrality (0.117) - this node is a cross-community bridge._
+- **What connects `Added`, `Fixed`, `Design Principles for Changes` to the rest of the system?**
+  _265 weakly-connected nodes found - possible documentation gaps or missing edges._
+- **Should `validate_profiles.py` be split into smaller, more focused modules?**
+  _Cohesion score 0.07955596669750231 - nodes in this community are weakly interconnected._
+- **Why does `Java / Spring Boot Engineering Profile` connect `Java / Spring Boot Engineering Profile` to `README.md`?**
+  _High betweenness centrality (0.110) - this node is a cross-community bridge._
+- **Should `README.md` be split into smaller, more focused modules?**
+  _Cohesion score 0.10685483870967742 - nodes in this community are weakly interconnected._
+- **Why does `PHP / Laravel 11 Engineering Profile` connect `PHP / Laravel 11 Engineering Profile` to `README.md`?**
+  _High betweenness centrality (0.102) - this node is a cross-community bridge._
+- **Should `Next.js Engineering Profile` be split into smaller, more focused modules?**
+  _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._

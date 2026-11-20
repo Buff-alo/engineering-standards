@@ -1,6 +1,6 @@
 # Engineering Personas
 
-**Version:** 1.0.0  
+**Version:** 1.0.0 <!-- x-release-please-version -->  
 **Scope:** Primary engineering perspective selection and behavioral expectations  
 **Purpose:** Define how an engineering agent selects a domain perspective to apply [ENGINEERING.md](ENGINEERING.md) and stack profiles.
 

@@ -1,6 +1,6 @@
 # Discovery, Composition, and Implementation Workflow
 
-**Version:** 1.0.0  
+**Version:** 1.0.0 <!-- x-release-please-version -->  
 **Scope:** Repository inspection, profile composition, conflict resolution, task execution, and planning outputs  
 **Purpose:** Establish a deterministic workflow from repository discovery through planning and implementation.
 

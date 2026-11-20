@@ -1,6 +1,6 @@
 # Quality Gates, Reporting, and Profile Maintenance
 
-**Version:** 1.0.0  
+**Version:** 1.0.0 <!-- x-release-please-version -->  
 **Scope:** Verification standards, evidence-based reporting, and profile registry governance  
 **Purpose:** Ensure every change is verified proportionally to risk, reported honestly, and kept consistent with the canonical profile registry.
 

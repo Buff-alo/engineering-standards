@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 from dataclasses import dataclass
+import json
 from pathlib import Path
 import re
 import sys
@@ -37,6 +38,8 @@ HOST_PATH_PATTERNS = (
     re.compile(r"~/\.gemini"),
     re.compile(r"~/\.claude"),
 )
+SEMVER_RE = re.compile(r"^\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?$")
+CORE_VERSION_RE = re.compile(r"^\*\*Version:\*\*\s*([^\s<(]+)")
 
 
 @dataclass(frozen=True)
@@ -376,6 +379,117 @@ def check_links_and_hygiene(root: Path, findings: list[ValidationFinding]) -> No
                         )
 
 
+def check_version_sync(root: Path, findings: list[ValidationFinding]) -> None:
+    """Verify VERSION, .release-please-manifest.json, and core/*.md versions stay aligned."""
+    version_file = root / "VERSION"
+    manifest_file = root / ".release-please-manifest.json"
+
+    if not version_file.exists() and not manifest_file.exists():
+        return
+
+    canonical_version: str | None = None
+    if not version_file.is_file():
+        findings.append(
+            ValidationFinding("ERROR", "MISSING_VERSION_FILE", Path("VERSION"), 0, "VERSION file is missing.")
+        )
+    else:
+        raw_version = version_file.read_text(encoding="utf-8").strip()
+        if not SEMVER_RE.match(raw_version):
+            findings.append(
+                ValidationFinding(
+                    "ERROR",
+                    "INVALID_VERSION",
+                    Path("VERSION"),
+                    1,
+                    f"VERSION '{raw_version}' is not a valid SemVer string.",
+                )
+            )
+        else:
+            canonical_version = raw_version
+
+    if not manifest_file.is_file():
+        findings.append(
+            ValidationFinding(
+                "ERROR",
+                "MISSING_MANIFEST",
+                Path(".release-please-manifest.json"),
+                0,
+                ".release-please-manifest.json is missing.",
+            )
+        )
+    else:
+        try:
+            manifest_data = json.loads(manifest_file.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as exc:
+            findings.append(
+                ValidationFinding(
+                    "ERROR",
+                    "INVALID_MANIFEST",
+                    Path(".release-please-manifest.json"),
+                    1,
+                    f"Invalid JSON in .release-please-manifest.json: {exc}.",
+                )
+            )
+        else:
+            manifest_version = manifest_data.get(".") if isinstance(manifest_data, dict) else None
+            if not isinstance(manifest_version, str) or not SEMVER_RE.match(manifest_version):
+                findings.append(
+                    ValidationFinding(
+                        "ERROR",
+                        "INVALID_MANIFEST",
+                        Path(".release-please-manifest.json"),
+                        1,
+                        "Manifest '.' entry must be a valid SemVer string.",
+                    )
+                )
+            elif canonical_version is not None and manifest_version != canonical_version:
+                findings.append(
+                    ValidationFinding(
+                        "ERROR",
+                        "VERSION_MISMATCH",
+                        Path(".release-please-manifest.json"),
+                        1,
+                        f"Manifest version '{manifest_version}' does not match VERSION '{canonical_version}'.",
+                    )
+                )
+
+    if canonical_version is None:
+        return
+
+    for rel_core in REQUIRED_CORE_FILES:
+        core_path = root / rel_core
+        if not core_path.is_file():
+            continue
+        found_line: int | None = None
+        found_version: str | None = None
+        for line_no, line in iter_non_fenced_lines(core_path.read_text(encoding="utf-8")):
+            match = CORE_VERSION_RE.match(line.strip())
+            if match:
+                found_line = line_no
+                found_version = match.group(1)
+                break
+        if found_version is None:
+            findings.append(
+                ValidationFinding(
+                    "ERROR",
+                    "VERSION_MISMATCH",
+                    rel_core,
+                    0,
+                    f"Missing '**Version:** {canonical_version}' header.",
+                )
+            )
+        elif found_version != canonical_version:
+            findings.append(
+                ValidationFinding(
+                    "ERROR",
+                    "VERSION_MISMATCH",
+                    rel_core,
+                    found_line or 0,
+                    f"Header version '{found_version}' does not match VERSION '{canonical_version}'.",
+                )
+            )
+
+
 def validate_repository(root: Path) -> list[ValidationFinding]:
     """Run all validation checks against root and return findings."""
     findings: list[ValidationFinding] = []
@@ -385,6 +499,7 @@ def validate_repository(root: Path) -> list[ValidationFinding]:
     check_profiles(root, profile_paths, known_personas, findings)
     check_registries(root, profile_paths, findings)
     check_links_and_hygiene(root, findings)
+    check_version_sync(root, findings)
     return findings
 
 

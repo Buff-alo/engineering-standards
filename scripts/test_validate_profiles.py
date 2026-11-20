@@ -113,6 +113,50 @@ class ValidateProfilesTests(unittest.TestCase):
     def test_missing_root_returns_exit_2(self) -> None:
         self.assertEqual(main(["--root", "/nonexistent/path/xyz123"]), 2)
 
+    def test_version_sync_passes_when_aligned(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            build_minimal_valid_repo(root)
+            (root / "VERSION").write_text("1.2.3\n", encoding="utf-8")
+            (root / ".release-please-manifest.json").write_text('{\n  ".": "1.2.3"\n}\n', encoding="utf-8")
+            (root / "core/ENGINEERING.md").write_text(
+                "# Universal Principles\n\n**Version:** 1.2.3 (Constitution Heritage: v3.0) <!-- x-release-please-version -->\n",
+                encoding="utf-8",
+            )
+            (root / "core/PERSONAS.md").write_text(
+                "# Personas\n\n**Version:** 1.2.3 <!-- x-release-please-version -->\n\n## 2. Persona Registry\n\n"
+                "| Domain | Primary persona | Responsibilities |\n"
+                "|---|---|---|\n"
+                "| Python | Senior Backend Engineer | APIs |\n",
+                encoding="utf-8",
+            )
+            (root / "core/WORKFLOW.md").write_text(
+                "# Workflow\n\n**Version:** 1.2.3 <!-- x-release-please-version -->\n\n- `profiles/backend/python-backend.md`\n",
+                encoding="utf-8",
+            )
+            (root / "core/QUALITY-GATES.md").write_text(
+                "# Quality Gates\n\n**Version:** 1.2.3 <!-- x-release-please-version -->\n\n- `profiles/backend/python-backend.md`\n",
+                encoding="utf-8",
+            )
+            self.assertEqual(validate_repository(root), [])
+
+    def test_version_sync_detects_mismatches_and_invalid_version(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            build_minimal_valid_repo(root)
+            (root / "VERSION").write_text("1.2.3\n", encoding="utf-8")
+            (root / ".release-please-manifest.json").write_text('{\n  ".": "1.2.0"\n}\n', encoding="utf-8")
+            (root / "core/ENGINEERING.md").write_text(
+                "# Universal Principles\n\n**Version:** 1.0.0\n",
+                encoding="utf-8",
+            )
+            codes = {f.code for f in validate_repository(root)}
+            self.assertIn("VERSION_MISMATCH", codes)
+
+            (root / "VERSION").write_text("not-a-semver\n", encoding="utf-8")
+            codes_invalid = {f.code for f in validate_repository(root)}
+            self.assertIn("INVALID_VERSION", codes_invalid)
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -42,3 +42,17 @@ python3 -m unittest discover -s scripts -v
 ```
 
 Document any breaking or behavioral changes under `[Unreleased]` in [CHANGELOG.md](CHANGELOG.md) following Semantic Versioning.
+
+---
+
+## Automated Versioning and Releases
+
+This repository uses [Conventional Commits](https://www.conventionalcommits.org/) with `release-please` on `master`:
+
+- `fix: ...` → Patch bump (`1.0.x`)
+- `feat: ...` → Minor bump (`1.x.0`)
+- `feat!: ...` or `BREAKING CHANGE:` footer → Major bump (`x.0.0`)
+
+Merging qualifying commits to `master` opens or updates a Release PR that synchronizes `VERSION`, `.release-please-manifest.json`, `CHANGELOG.md`, and `core/*.md` version headers. Merging that Release PR automatically creates the `vX.Y.Z` Git tag, publishes the GitHub Release, and attaches `.tar.gz`, `.zip`, and `SHA256SUMS.txt` assets.
+
+> **Note on branch protection:** Because PRs opened with the default `GITHUB_TOKEN` do not trigger `pull_request` workflows (`ci.yml`), `.github/workflows/release.yml` runs the full validation suite before releasing. If you enable required PR status checks on `master`, configure `release.yml` with a GitHub App token so Release PRs trigger `ci.yml` directly.
