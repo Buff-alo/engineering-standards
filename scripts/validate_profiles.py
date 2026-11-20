@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Validate engineering-standards repository structure, profiles, links, and hygiene."""
+"""Structural and repository consistency validator for engineering-standards.
+
+Checks profile metadata, persona alignment, companion existence, registry parity,
+Markdown links, repo-relative references, LF line endings, host-path hygiene, and
+version synchronization. Does not test live AI tool integration or semantic rule conflicts.
+"""
 
 from __future__ import annotations
 
@@ -506,7 +511,10 @@ def validate_repository(root: Path) -> list[ValidationFinding]:
 def main(argv: list[str] | None = None) -> int:
     """CLI entrypoint."""
     parser = argparse.ArgumentParser(
-        description="Validate engineering-standards repository structure, profiles, and links."
+        description=(
+            "Structural and repository consistency validator for engineering-standards "
+            "(metadata, links, registries, hygiene, and version sync)."
+        )
     )
     parser.add_argument(
         "--root",

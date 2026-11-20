@@ -9,7 +9,7 @@ Contributions that improve clarity, correctness, security rigor, and cross-tool 
 1. **Keep `core/` universal and tool-agnostic.** Framework-specific dependencies, patterns, and CLI commands belong in `profiles/`, never in `core/`.
 2. **Keep `integrations/` thin.** Tool adapters (`GEMINI.md`, `CLAUDE.md`, `AGENTS.md`) must point to `core/` and `profiles/` rather than duplicating rules.
 3. **Avoid machine-local assumptions.** Never commit personal filesystem paths, internal secrets, or unconfigurable local hostnames inside `core/` or `profiles/`.
-4. **Preserve explicit precedence.** Project-specific contracts override stack profiles, and safety/security constraints override everything.
+4. **Preserve explicit precedence and core invariants.** Project-specific contracts may specialize tooling, versions, and architecture, but MUST NOT silently weaken security, privacy, data integrity, or honest verification invariants. Safety and security constraints override everything.
 
 ---
 
@@ -34,11 +34,13 @@ Every profile under `profiles/<domain>/<name>.md` MUST:
 
 ## Required Verification Before Opening a PR
 
-Run both checks and ensure zero errors or strict-mode warnings:
+Run the structural consistency validator, integration/template checks, packaging syntax check, and unit tests, ensuring zero errors or strict-mode warnings:
 
 ```bash
 python3 scripts/validate_profiles.py --root . --strict
+python3 scripts/check_integrations_and_templates.py --root .
 python3 -m unittest discover -s scripts -v
+bash -n scripts/package_release.sh
 ```
 
 Document any breaking or behavioral changes under `[Unreleased]` in [CHANGELOG.md](CHANGELOG.md) following Semantic Versioning.
@@ -47,7 +49,7 @@ Document any breaking or behavioral changes under `[Unreleased]` in [CHANGELOG.m
 
 ## Automated Versioning and Releases
 
-This repository uses [Conventional Commits](https://www.conventionalcommits.org/) with `release-please` on `master`:
+This repository uses `master` as its default integration branch and [Conventional Commits](https://www.conventionalcommits.org/) with `release-please` on `master`:
 
 - `fix: ...` → Patch bump (`1.0.x`)
 - `feat: ...` → Minor bump (`1.x.0`)

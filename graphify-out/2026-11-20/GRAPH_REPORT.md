@@ -1,12 +1,12 @@
 # Graph Report - engineering-standards  (2026-11-20)
 
 ## Corpus Check
-- 33 files · ~19,546 words
+- 35 files · ~19,000 words
 - Verdict: corpus is large enough that graph structure adds value.
-- Unclassified: 2 file(s) not represented in the graph (top: (none) 2)
+- Unclassified: 4 file(s) not represented in the graph (top: (none) 4)
 
 ## Summary
-- 399 nodes · 459 edges · 30 communities
+- 396 nodes · 464 edges · 30 communities (29 shown, 1 thin omitted)
 - Extraction: 100% EXTRACTED · 0% INFERRED · 0% AMBIGUOUS
 - Token cost: 0 input · 0 output
 
@@ -23,7 +23,7 @@
 - PHP / Laravel 11 Engineering Profile
 - React & Frontend Engineering Profile
 - 2. Task Classification and Execution
-- Design & Implementation Plan: `engineering-standards` Repository
+- release-please-config.json
 - DevSecOps & Platform Engineering Profile
 - Python Backend Engineering Profile
 - AI / LLM Engineering Profile
@@ -41,17 +41,17 @@
 - CLAUDE.md — Project Claude Code Instructions
 - GEMINI.md — Project Gemini Instructions
 - Project Engineering Profile
-- [1.0.0] - 2026-11-20
+- Contributing to engineering-standards
 - Claude Code Integration
 - AGENTS.md — Codex Adapter
-- Gemini CLI / Antigravity Adapter
+- package_release.sh
 - Gemini CLI & Antigravity Integration
 
 ## God Nodes (most connected - your core abstractions)
 1. `Java / Spring Boot Engineering Profile` - 27 edges
 2. `PHP / Laravel 11 Engineering Profile` - 23 edges
 3. `Next.js Engineering Profile` - 22 edges
-4. `validate_repository()` - 17 edges
+4. `validate_repository()` - 20 edges
 5. `DevSecOps & Platform Engineering Profile` - 17 edges
 6. `Python Backend Engineering Profile` - 15 edges
 7. `React & Frontend Engineering Profile` - 15 edges
@@ -65,15 +65,15 @@
 ## Import Cycles
 - None detected.
 
-## Communities (30 total, 0 thin omitted)
+## Communities (30 total, 1 thin omitted)
 
 ### Community 0 - "validate_profiles.py"
 Cohesion: 0.08
-Nodes (13): build_minimal_valid_repo(), ValidateProfilesTests, check_links_and_hygiene(), check_profiles(), check_registries(), check_structure(), discover_profiles(), extract_personas() (+5 more)
+Nodes (14): build_minimal_valid_repo(), ValidateProfilesTests, check_links_and_hygiene(), check_profiles(), check_registries(), check_structure(), check_version_sync(), discover_profiles() (+6 more)
 
 ### Community 1 - "README.md"
-Cohesion: 0.11
-Nodes (11): Adding or Updating a Stack Profile, Contributing to engineering-standards, Design Principles for Changes, Required Verification Before Opening a PR, Codex Integration, Maintenance, Setup in a Target Repository, 1. Core Standards (+3 more)
+Cohesion: 0.09
+Nodes (14): [1.0.0] - 2026-11-20, Added, Changelog, Fixed, Codex Integration, Maintenance, Setup in a Target Repository, Gemini CLI / Antigravity Adapter (+6 more)
 
 ### Community 2 - "Next.js Engineering Profile"
 Cohesion: 0.06
@@ -95,9 +95,9 @@ Nodes (22): 10. Forms and User Interaction, 11. Testing, 12. Project Organizatio
 Cohesion: 0.12
 Nodes (17): 1.1 Inspect before changing, 1.2 Detect the actual stack, 1.3 Load only applicable profiles, 1.4 Resolve conflicting instructions, 1. Repository Discovery and Profile Loading, 2. Task Classification and Execution, 3. Implementation Workflow, 4. Planning Output Standard (+9 more)
 
-### Community 7 - "Design & Implementation Plan: `engineering-standards` Repository"
-Cohesion: 0.12
-Nodes (16): 1. Understanding Summary, 2. Assumptions, 3. Decision Log, 4. Final Architecture & Design, 5. System & Security Constraints, 6.1 Profile Metadata & Contract Schema (`profiles/<domain>/<name>.md`), 6.2 `core/QUALITY-GATES.md` Registry Contract, 6.3 Validator CLI & JSON/Exit Contract (`scripts/validate_profiles.py`) (+8 more)
+### Community 7 - "release-please-config.json"
+Cohesion: 0.33
+Nodes (5): bump-minor-pre-major, bump-patch-for-minor-pre-major, packages, release-type, $schema
 
 ### Community 8 - "DevSecOps & Platform Engineering Profile"
 Cohesion: 0.12
@@ -167,9 +167,9 @@ Nodes (4): 1. Core Standards, 2. Active Stack Profiles, 3. Project Overrides & V
 Cohesion: 0.40
 Nodes (5): 1. Verified Runtime & Tooling, 2. Authoritative Verification Commands, 3. Approved Deviations & Local Conventions, 4. Critical Invariants & Operational Notes, Project Engineering Profile
 
-### Community 25 - "[1.0.0] - 2026-11-20"
-Cohesion: 0.50
-Nodes (4): [1.0.0] - 2026-11-20, Added, Changelog, Fixed
+### Community 25 - "Contributing to engineering-standards"
+Cohesion: 0.40
+Nodes (5): Adding or Updating a Stack Profile, Automated Versioning and Releases, Contributing to engineering-standards, Design Principles for Changes, Required Verification Before Opening a PR
 
 ### Community 26 - "Claude Code Integration"
 Cohesion: 0.50
@@ -179,32 +179,29 @@ Nodes (4): Claude Code Integration, Maintenance, Option 1: Per-Project Setup, Op
 Cohesion: 0.50
 Nodes (3): AGENTS.md — Codex Adapter, Explicit Profile Composition, Universal Standards
 
-### Community 28 - "Gemini CLI / Antigravity Adapter"
-Cohesion: 0.50
-Nodes (3): Gemini CLI / Antigravity Adapter, Load Core Standards, Profile Composition
-
 ### Community 29 - "Gemini CLI & Antigravity Integration"
 Cohesion: 0.50
 Nodes (4): Gemini CLI & Antigravity Integration, Maintenance, Option 1: Global Setup (`~/.gemini/GEMINI.md`), Option 2: Per-Project Setup
 
 ## Knowledge Gaps
-- **265 isolated node(s):** `Added`, `Fixed`, `Design Principles for Changes`, `Adding or Updating a Stack Profile`, `Required Verification Before Opening a PR` (+260 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 290 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **259 isolated node(s):** `$schema`, `release-type`, `bump-minor-pre-major`, `bump-patch-for-minor-pre-major`, `packages` (+254 more)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 285 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+- **1 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `Next.js Engineering Profile` connect `Next.js Engineering Profile` to `README.md`?**
-  _High betweenness centrality (0.117) - this node is a cross-community bridge._
-- **What connects `Added`, `Fixed`, `Design Principles for Changes` to the rest of the system?**
-  _265 weakly-connected nodes found - possible documentation gaps or missing edges._
+  _High betweenness centrality (0.120) - this node is a cross-community bridge._
+- **What connects `$schema`, `release-type`, `bump-minor-pre-major` to the rest of the system?**
+  _259 weakly-connected nodes found - possible documentation gaps or missing edges._
 - **Should `validate_profiles.py` be split into smaller, more focused modules?**
-  _Cohesion score 0.07955596669750231 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.07541478129713423 - nodes in this community are weakly interconnected._
 - **Why does `Java / Spring Boot Engineering Profile` connect `Java / Spring Boot Engineering Profile` to `README.md`?**
-  _High betweenness centrality (0.110) - this node is a cross-community bridge._
+  _High betweenness centrality (0.112) - this node is a cross-community bridge._
 - **Should `README.md` be split into smaller, more focused modules?**
-  _Cohesion score 0.10685483870967742 - nodes in this community are weakly interconnected._
+  _Cohesion score 0.09047619047619047 - nodes in this community are weakly interconnected._
 - **Why does `PHP / Laravel 11 Engineering Profile` connect `PHP / Laravel 11 Engineering Profile` to `README.md`?**
-  _High betweenness centrality (0.102) - this node is a cross-community bridge._
+  _High betweenness centrality (0.104) - this node is a cross-community bridge._
 - **Should `Next.js Engineering Profile` be split into smaller, more focused modules?**
   _Cohesion score 0.06451612903225806 - nodes in this community are weakly interconnected._

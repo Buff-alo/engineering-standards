@@ -30,5 +30,14 @@ jobs:
       - name: Validate profiles and repository hygiene
         run: python3 scripts/validate_profiles.py --root . --strict
 
+      - name: Check integration adapters, templates, and workflows
+        run: python3 scripts/check_integrations_and_templates.py --root .
+
       - name: Run unit tests
         run: python3 -m unittest discover -s scripts -v
+
+      - name: Verify release packaging script and archive manifest
+        run: |
+          bash -n scripts/package_release.sh
+          ./scripts/package_release.sh 0.0.0-ci /tmp/ci-dist
+          rm -rf /tmp/ci-dist

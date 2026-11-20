@@ -43,7 +43,11 @@ for doc in architecture.md customization.md profile-selection.md; do
   fi
 done
 
-for script_file in validate_profiles.py test_validate_profiles.py; do
+for script_file in validate_profiles.py test_validate_profiles.py check_integrations_and_templates.py test_check_integrations_and_templates.py; do
+  if [[ ! -f "$REPO_ROOT/scripts/$script_file" ]]; then
+    echo "Error: required script '$script_file' is missing." >&2
+    exit 1
+  fi
   cp "$REPO_ROOT/scripts/$script_file" "$STAGE_DIR/scripts/$script_file"
 done
 
@@ -81,6 +85,50 @@ tar -C "$STAGE_ROOT" -czf "$TAR_PATH" "$PREFIX"
     shasum -a 256 "${PREFIX}.tar.gz" "${PREFIX}.zip" > "$SUMS_PATH"
   fi
 )
+
+# Verify archive contents against expected release manifest
+python3 - "$TAR_PATH" "$ZIP_PATH" "$PREFIX" <<'PY'
+import sys
+import tarfile
+import zipfile
+
+tar_path, zip_path, prefix = sys.argv[1:4]
+expected_entries = [
+    f"{prefix}/README.md",
+    f"{prefix}/CHANGELOG.md",
+    f"{prefix}/CONTRIBUTING.md",
+    f"{prefix}/LICENSE",
+    f"{prefix}/VERSION",
+    f"{prefix}/core/ENGINEERING.md",
+    f"{prefix}/core/PERSONAS.md",
+    f"{prefix}/core/WORKFLOW.md",
+    f"{prefix}/core/QUALITY-GATES.md",
+    f"{prefix}/profiles/backend/php-laravel.md",
+    f"{prefix}/profiles/backend/php-laravel-11.md",
+    f"{prefix}/integrations/gemini/GEMINI.md",
+    f"{prefix}/integrations/claude/CLAUDE.md",
+    f"{prefix}/integrations/codex/AGENTS.md",
+    f"{prefix}/templates/project-profile.md",
+    f"{prefix}/docs/architecture.md",
+    f"{prefix}/scripts/validate_profiles.py",
+    f"{prefix}/scripts/check_integrations_and_templates.py",
+]
+forbidden_substrings = (".DS_Store", "__pycache__", ".pyc", ".git/", ".agents/", "graphify-out/")
+
+with tarfile.open(tar_path, "r:gz") as tf:
+    tar_names = set(tf.getnames())
+with zipfile.ZipFile(zip_path, "r") as zf:
+    zip_names = set(zf.namelist())
+
+for label, names in (("tar.gz", tar_names), ("zip", zip_names)):
+    missing = [e for e in expected_entries if e not in names]
+    forbidden = [n for n in names if any(tok in n for tok in forbidden_substrings)]
+    if missing or forbidden:
+        print(f"Error: {label} archive verification failed. missing={missing} forbidden={forbidden}", file=sys.stderr)
+        raise SystemExit(1)
+
+print("Verified tar.gz and zip archive manifests.")
+PY
 
 echo "Packaged release artifacts in $OUT_DIR_ABS:"
 ls -1 "$TAR_PATH" "$ZIP_PATH" "$SUMS_PATH"

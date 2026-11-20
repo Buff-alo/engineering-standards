@@ -14,7 +14,7 @@ Instead of scattering duplicated prompt instructions across individual tools, `e
 | **Profiles** (`profiles/`) | Stack-specific architecture, security, concurrency, and testing rules | `backend/python-backend.md`, `frontend/nextjs.md`, `systems/rust.md` |
 | **Integrations** (`integrations/`) | Thin adapters mapping core + profiles to specific AI tools | `gemini/`, `claude/`, `codex/` |
 | **Templates** (`templates/`) | Copy-ready starter files for target repositories | `AGENTS.md`, `GEMINI.md`, `CLAUDE.md`, `project-profile.md` |
-| **Validation** (`scripts/`) | Automated consistency checks for links, metadata, and registries | `validate_profiles.py` |
+| **Validation** (`scripts/`) | Structural repository checks, integration/template checks, and release packaging | `validate_profiles.py`, `check_integrations_and_templates.py` |
 
 ---
 
@@ -61,8 +61,11 @@ See [docs/profile-selection.md](docs/profile-selection.md) for the full selectio
 
 ```bash
 python3 scripts/validate_profiles.py --root . --strict
+python3 scripts/check_integrations_and_templates.py --root .
 python3 -m unittest discover -s scripts -v
 ```
+
+> **Note on validation scope:** `validate_profiles.py` is a structural and repository consistency validator (metadata, links, registries, hygiene, and version sync). `check_integrations_and_templates.py` verifies adapter/template completeness and workflow/packaging alignment. Neither script replaces testing live agent behavior inside Gemini CLI, Claude Code, or Codex.
 
 ---
 
